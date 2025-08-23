@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/jpoon/RotaryWheel/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jpoon/RotaryWheel/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright © Microsoft 2015</copyright>
+    <tags>UWP Windows10 UserControl RotaryWheel Radial</tags>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\*.dll" target="lib\uap10.0\" />
+    <file src="bin\$configuration$\*.pdb" target="lib\uap10.0\" />
+    <file src="bin\$configuration$\*.pri" target="lib\uap10.0\" />
+    <file src="bin\$configuration$\*.xr.xml" target="lib\uap10.0\$id$\" />
+    <file src="bin\$configuration$\*.xbf" target="lib\uap10.0\$id$\" />
+  </files>
+</package>
