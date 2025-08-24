@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,19 +22,52 @@ namespace WheelOfNames
     /// </summary>
     public partial class SelectionWheel : UserControl
     {
-        private readonly List<string> colors = new List<string>
+        private readonly List<string> ColorList = new List<string>
         {
-            "Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "Cyan"
+            "Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "AliceBlue",
+            "AntiqueWhite",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "DarkKhaki",
+            "Black","Tomato",
+            "BlanchedAlmond",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "Seagreen","Violet",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Crimson","Gold","Silver",
+            "Cyan"
         };
+        
+        public static readonly DependencyProperty NamesProperty =
+        DependencyProperty.Register(
+            nameof(_Names),
+            typeof(ObservableCollection<string>),
+            typeof(SelectionWheel),
+            new PropertyMetadata(new ObservableCollection<string>())
+        );
 
+        public IList<string> Names
+        {
+            get;
+            set;
+        }
+        private ObservableCollection<string> _Names;
         private readonly List<Path> slicePaths = new List<Path>();
         private readonly Random rand = new Random();
         public SelectionWheel()
         {
+            //Names = _names != null && _names.Count > 0 ? _names.Take(ColorList.Count).ToList() : ColorList;
             InitializeComponent();
-            DrawWheel();
+            //DrawWheel();
+            
         }
-        private void DrawWheel()
+        public void DrawWheel()
         {
             WheelCanvas.Children.Clear();
             slicePaths.Clear();
@@ -41,9 +75,9 @@ namespace WheelOfNames
             double centerX = WheelCanvas.Width / 2;
             double centerY = WheelCanvas.Height / 2;
             double radius = WheelCanvas.Width / 2;
-            double anglePerSlice = 360.0 / colors.Count;
-
-            for (int i = 0; i < colors.Count; i++)
+            double anglePerSlice = 360.0 / Names.Count;
+            IList<string> _names= Names != null && Names.Count > 0 ? Names.Take(ColorList.Count).ToList() : ColorList;
+            for (int i = 0; i < _names.Count; i++)
             {
                 double startAngle = i * anglePerSlice;
                 double endAngle = startAngle + anglePerSlice;
@@ -60,7 +94,7 @@ namespace WheelOfNames
                 fig.Segments.Add(new LineSegment(new Point(centerX, centerY), true));
 
                 PathGeometry geom = new PathGeometry(new[] { fig });
-                var solidBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(colors[i]);
+                var solidBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(ColorList[i]);
                 Path path = new Path
                 {
                     Fill = solidBrush,
@@ -77,7 +111,7 @@ namespace WheelOfNames
                 double labelY = centerY + (radius / 1.5) * Math.Sin(midAngle * Math.PI / 180);
                 var label = new System.Windows.Controls.TextBlock
                 {
-                    Text = colors[i],
+                    Text = _names[i],
                     Foreground = new SolidColorBrush(GetContrastColor(solidBrush.Color)),
                     FontWeight = FontWeights.Bold
                 };
@@ -88,10 +122,10 @@ namespace WheelOfNames
         }
         private void Spin()
         {
-            int selectedIndex = rand.Next(colors.Count);
-            string selectedColor = colors[selectedIndex];
+            int selectedIndex = rand.Next(Names.Count);
+            string selectedColor = Names[selectedIndex];
 
-            double anglePerSlice = 360.0 / colors.Count;
+            double anglePerSlice = 360.0 / Names.Count;
             double targetAngle = 360 - (selectedIndex * anglePerSlice + anglePerSlice / 2);
 
             double currentRotation = ((RotateTransform)WheelCanvas.RenderTransform).Angle;
@@ -142,6 +176,10 @@ namespace WheelOfNames
         }
         private void Spin_Click(object sender, RoutedEventArgs e)
         {
+            if(WheelCanvas?.Children?.Count > 0)
+            {
+                DrawWheel();
+            }
             Spin();
         }
         private System.Windows.Media.Color GetContrastColor(System.Windows.Media.Color color)

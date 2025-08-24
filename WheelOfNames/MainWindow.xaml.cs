@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,6 +24,8 @@ namespace WheelOfNames
         public MainWindow()
         {
             InitializeComponent();
+            ColorWheel.Names = new string[] { "Dan", "Sarah", "Sam","Martin","Clara" };
+            ColorWheel.DrawWheel();
         }
 
         

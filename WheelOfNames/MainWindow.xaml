@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="Wheel of Names" Height="600" Width="600">
     <Grid>
-        <local:SelectionWheel></local:SelectionWheel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="1"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <local:SelectionWheel x:Name="ColorWheel" Grid.Column="0">
+        </local:SelectionWheel>
     </Grid>
 </Window>
