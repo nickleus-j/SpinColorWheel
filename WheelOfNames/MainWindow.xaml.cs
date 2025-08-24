@@ -97,7 +97,7 @@ namespace WheelOfNames
             double currentRotation = ((RotateTransform)WheelCanvas.RenderTransform).Angle;
             double spins = 5 * 360; // extra full rotations
             double finalAngle = currentRotation + spins + targetAngle;
-
+            ResetSliceStrokes();
             var anim = new DoubleAnimation
             {
                 From = currentRotation,
@@ -115,7 +115,7 @@ namespace WheelOfNames
 
             ((RotateTransform)WheelCanvas.RenderTransform).BeginAnimation(System.Windows.Media.RotateTransform.AngleProperty, anim);
         }
-        private void HighlightSlice(int index)
+        private void ResetSliceStrokes()
         {
             // Reset all slices
             foreach (var slice in slicePaths)
@@ -124,6 +124,10 @@ namespace WheelOfNames
                 slice.StrokeThickness = 1;
                 slice.Effect = null;
             }
+        }
+        private void HighlightSlice(int index)
+        {
+            
 
             // Highlight selected slice
             var chosen = slicePaths[index];
