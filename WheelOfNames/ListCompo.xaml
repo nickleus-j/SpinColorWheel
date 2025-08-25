@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="WheelOfNames.ListCompo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WheelOfNames"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="500">
+    <StackPanel>
+        <Label Content="Enter Names Here"></Label>
+        <TextBox x:Name="StringBox" FontSize="14"></TextBox>
+        <Button x:Name="Add" Content="Add Name" Click="AddNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>
+        <ListBox x:Name="NamesBox" MinHeight="50" Margin="0,0,0,10"></ListBox>
+        <Button x:Name="Remove" Content="Remove Name" Click="RemoveNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>
+    </StackPanel>
+</UserControl>

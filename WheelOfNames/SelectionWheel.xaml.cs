@@ -44,28 +44,13 @@ namespace WheelOfNames
             "Cyan"
         };
         
-        public static readonly DependencyProperty NamesProperty =
-        DependencyProperty.Register(
-            nameof(_Names),
-            typeof(ObservableCollection<string>),
-            typeof(SelectionWheel),
-            new PropertyMetadata(new ObservableCollection<string>())
-        );
 
-        public IList<string> Names
-        {
-            get;
-            set;
-        }
-        private ObservableCollection<string> _Names;
+        private IList<string> Names => NameList.Names;
         private readonly List<Path> slicePaths = new List<Path>();
         private readonly Random rand = new Random();
         public SelectionWheel()
         {
-            //Names = _names != null && _names.Count > 0 ? _names.Take(ColorList.Count).ToList() : ColorList;
             InitializeComponent();
-            //DrawWheel();
-            
         }
         public void DrawWheel()
         {
@@ -118,6 +103,18 @@ namespace WheelOfNames
                 Canvas.SetLeft(label, labelX - 20);
                 Canvas.SetTop(label, labelY - 10);
                 WheelCanvas.Children.Add(label);
+            }
+        }
+        public void AddName(string name)
+        {
+            if (Names.Count < ColorList.Count)
+            {
+                NameList.StringBox.Text = name;
+                NameList.AddNamefromTextBox();
+            }
+            else
+            {
+                MessageBox.Show("Too many names on the list");
             }
         }
         private void Spin()
@@ -189,6 +186,11 @@ namespace WheelOfNames
 
             // If light background → return black text, otherwise white text
             return luminance > 128 ? Colors.Black : Colors.White;
+        }
+
+        private void NameList_ChangeNames(object sender, EventArgs e)
+        {
+            DrawWheel();
         }
     }
 }

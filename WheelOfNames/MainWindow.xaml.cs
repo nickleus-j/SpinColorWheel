@@ -24,7 +24,8 @@ namespace WheelOfNames
         public MainWindow()
         {
             InitializeComponent();
-            ColorWheel.Names = new string[] { "Dan", "Sarah", "Sam","Martin","Clara" };
+            ColorWheel.AddName("Sara");
+            ColorWheel.AddName("John");
             ColorWheel.DrawWheel();
         }
 
