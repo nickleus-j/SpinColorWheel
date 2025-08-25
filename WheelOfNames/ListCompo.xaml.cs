@@ -62,5 +62,11 @@ namespace WheelOfNames
             }
         }
         public static readonly DependencyProperty NamesProperty = DependencyProperty.Register("ConcatenatedNames", typeof(string), typeof(ListCompo), new PropertyMetadata(""));
+
+        private void StringBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter && e.Key != System.Windows.Input.Key.Return && e.Key != System.Windows.Input.Key.BrowserRefresh) return;
+            AddNamefromTextBox();
+        }
     }
 }

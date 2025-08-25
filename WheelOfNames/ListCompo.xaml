@@ -8,7 +8,7 @@
              d:DesignHeight="400" d:DesignWidth="500">
     <StackPanel>
         <Label Content="Enter Names Here"></Label>
-        <TextBox x:Name="StringBox" FontSize="14"></TextBox>
+        <TextBox x:Name="StringBox" FontSize="14" KeyUp="StringBox_KeyUp"></TextBox>
         <Button x:Name="Add" Content="Add Name" Click="AddNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>
         <ListBox x:Name="NamesBox" MinHeight="50" Margin="0,0,0,10"></ListBox>
         <Button x:Name="Remove" Content="Remove Name" Click="RemoveNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>

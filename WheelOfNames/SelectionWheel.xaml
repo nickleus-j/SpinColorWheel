@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <DockPanel>
-        <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames"></local:ListCompo>
+        <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames" DockPanel.Dock="Left"></local:ListCompo>
         <Canvas x:Name="WheelCanvas" Width="400" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="WheelRotate" CenterX="200" CenterY="200"/>

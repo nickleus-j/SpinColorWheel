@@ -114,7 +114,7 @@ namespace WheelOfNames
             }
             else
             {
-                MessageBox.Show("Too many names on the list");
+                MessageBox.Show("Too many names on the List");
             }
         }
         private void Spin()
