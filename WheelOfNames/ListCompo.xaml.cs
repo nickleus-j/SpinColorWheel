@@ -39,6 +39,10 @@ namespace WheelOfNames
                 RaiseNameChangeEvent();
             }
         }
+        public void UnselectNames()
+        {
+            NamesBox.UnselectAll();
+        }
         private void AddNameButton_Click(object sender, RoutedEventArgs e)
         {
             AddNamefromTextBox();
@@ -65,7 +69,7 @@ namespace WheelOfNames
 
         private void StringBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter && e.Key != System.Windows.Input.Key.Return && e.Key != System.Windows.Input.Key.BrowserRefresh) return;
+            if (e.Key != Key.Enter && e.Key != Key.Return && e.Key != Key.BrowserRefresh) return;
             AddNamefromTextBox();
         }
     }

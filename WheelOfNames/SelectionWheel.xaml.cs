@@ -117,6 +117,11 @@ namespace WheelOfNames
                 MessageBox.Show("Too many names on the List");
             }
         }
+        private void ResetWinnerLabels()
+        {
+            ResultLabel.Content = String.Empty;
+            NameList.UnselectNames();
+        }
         private void Spin()
         {
             int selectedIndex = rand.Next(Names.Count);
@@ -128,6 +133,7 @@ namespace WheelOfNames
             double currentRotation = ((RotateTransform)WheelCanvas.RenderTransform).Angle;
             double spins = 5 * 360; // extra full rotations
             double finalAngle = currentRotation + spins + targetAngle;
+            ResetWinnerLabels();
             ResetSliceStrokes();
             var anim = new DoubleAnimation
             {
