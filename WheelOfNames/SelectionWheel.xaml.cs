@@ -121,6 +121,7 @@ namespace WheelOfNames
         {
             ResultLabel.Content = String.Empty;
             NameList.UnselectNames();
+            PickRemoverBtn.Visibility = Visibility.Hidden;
         }
         private void Spin()
         {
@@ -148,6 +149,8 @@ namespace WheelOfNames
                 ResultLabel.Content = $"Picked: {selectedColor}";
                 ((RotateTransform)WheelCanvas.RenderTransform).Angle = finalAngle % 360;
                 HighlightSlice(selectedIndex);
+                NameList.NamesBox.SelectedIndex = selectedIndex;
+                PickRemoverBtn.Visibility = Visibility.Visible;
             };
 
             ((RotateTransform)WheelCanvas.RenderTransform).BeginAnimation(System.Windows.Media.RotateTransform.AngleProperty, anim);
@@ -185,6 +188,13 @@ namespace WheelOfNames
             }
             Spin();
         }
+        private void RemovePick_Click(object sender, RoutedEventArgs e)
+        {
+            if (WheelCanvas?.Children?.Count > 1)
+            {
+                NameList.RemoveSelectedName();
+            }
+        }
         private System.Windows.Media.Color GetContrastColor(System.Windows.Media.Color color)
         {
             // Calculate luminance (perceived brightness)
@@ -197,6 +207,7 @@ namespace WheelOfNames
         private void NameList_ChangeNames(object sender, EventArgs e)
         {
             DrawWheel();
+            ResetWinnerLabels();
         }
     }
 }

@@ -13,9 +13,10 @@
                 <RotateTransform x:Name="WheelRotate" CenterX="200" CenterY="200"/>
             </Canvas.RenderTransform>
         </Canvas>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
-            <Button Content="Spin" Width="100" Height="40" Click="Spin_Click" Background="#FFEFF585" FontSize="20"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Label x:Name="ResultLabel" FontSize="20" HorizontalAlignment="Center" Margin="10" FontFamily="Segoe UI Semibold"/>
+            <Button x:Name="PickRemoverBtn" Content="Remove Picked Name" Height="30" Click="RemovePick_Click" Background="#FFE6AFB4" FontSize="14" Visibility="Hidden"/>
+            <Button Content="Spin" Width="100" Height="40" Click="Spin_Click" Background="#FFEFF585" FontSize="20"/>
         </StackPanel>
     </DockPanel>
 </UserControl>

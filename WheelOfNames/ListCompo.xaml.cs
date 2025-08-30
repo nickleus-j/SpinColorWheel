@@ -39,6 +39,16 @@ namespace WheelOfNames
                 RaiseNameChangeEvent();
             }
         }
+        public void RemoveSelectedName()
+        {
+            if (NamesBox.SelectedItem != null)
+            {
+                int index = NamesBox.SelectedIndex;
+                Names.Remove(Names.ElementAt(index));
+                NamesBox.Items.RemoveAt(index);
+                RaiseNameChangeEvent();
+            }
+        }
         public void UnselectNames()
         {
             NamesBox.UnselectAll();
@@ -57,13 +67,7 @@ namespace WheelOfNames
         }
         private void RemoveNameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NamesBox.SelectedItem != null)
-            {
-                int index = NamesBox.SelectedIndex;
-                Names.Remove(Names.ElementAt(index));
-                NamesBox.Items.RemoveAt(index);
-                RaiseNameChangeEvent();
-            }
+            RemoveSelectedName();
         }
         public static readonly DependencyProperty NamesProperty = DependencyProperty.Register("ConcatenatedNames", typeof(string), typeof(ListCompo), new PropertyMetadata(""));
 
