@@ -10,7 +10,13 @@
         <Label Content="Enter Names Here"></Label>
         <TextBox x:Name="StringBox" FontSize="14" KeyUp="StringBox_KeyUp"></TextBox>
         <Button x:Name="Add" Content="Add Name" Click="AddNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>
-        <ListBox x:Name="NamesBox" MinHeight="50" Margin="0,0,0,10"></ListBox>
+        <ListBox x:Name="NamesBox" MinHeight="50" Margin="0,0,0,10"  ItemsSource="{Binding Names,Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding .,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" FontSize="14" FontFamily="Sitka Text"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button x:Name="Remove" Content="Remove Name" Click="RemoveNameButton_Click" Margin="0,10,0,5" FontSize="16"></Button>
     </StackPanel>
 </UserControl>

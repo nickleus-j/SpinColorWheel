@@ -45,7 +45,7 @@ namespace WheelOfNames
         };
         
 
-        private IList<string> Names => NameList.Names;
+        private IList<string> NamesOnListBox => NameList.NamesListed;
         private readonly List<Path> slicePaths = new List<Path>();
         private readonly Random rand = new Random();
         public SelectionWheel()
@@ -60,9 +60,10 @@ namespace WheelOfNames
             double centerX = WheelCanvas.Width / 2;
             double centerY = WheelCanvas.Height / 2;
             double radius = WheelCanvas.Width / 2;
-            double anglePerSlice = 360.0 / Names.Count;
-            IList<string> _names= Names != null && Names.Count > 0 ? Names.Take(ColorList.Count).ToList() : ColorList;
-            for (int i = 0; i < _names.Count; i++)
+
+            IList<string> _namesOnWheel = NamesOnListBox != null && NamesOnListBox.Count > 0 ? NamesOnListBox.Take(ColorList.Count).ToList() : ColorList;
+            double anglePerSlice = _namesOnWheel.Count>1? 360.0 / _namesOnWheel.Count:359.9;
+            for (int i = 0; i < _namesOnWheel.Count; i++)
             {
                 double startAngle = i * anglePerSlice;
                 double endAngle = startAngle + anglePerSlice;
@@ -78,14 +79,14 @@ namespace WheelOfNames
                     new Size(radius, radius), anglePerSlice, anglePerSlice >= 180, SweepDirection.Clockwise, true));
                 fig.Segments.Add(new LineSegment(new Point(centerX, centerY), true));
 
-                PathGeometry geom = new PathGeometry(new[] { fig });
+                PathGeometry geometry = new PathGeometry(new[] { fig });
                 var solidBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(ColorList[i]);
                 Path path = new Path
                 {
                     Fill = solidBrush,
                     Stroke = Brushes.Black,
                     StrokeThickness = 1,
-                    Data = geom
+                    Data = geometry
                 };
                 WheelCanvas.Children.Add(path);
                 slicePaths.Add(path);
@@ -96,25 +97,13 @@ namespace WheelOfNames
                 double labelY = centerY + (radius / 1.5) * Math.Sin(midAngle * Math.PI / 180);
                 var label = new System.Windows.Controls.TextBlock
                 {
-                    Text = _names[i],
+                    Text = _namesOnWheel[i],
                     Foreground = new SolidColorBrush(GetContrastColor(solidBrush.Color)),
                     FontWeight = FontWeights.Bold
                 };
                 Canvas.SetLeft(label, labelX - 20);
                 Canvas.SetTop(label, labelY - 10);
                 WheelCanvas.Children.Add(label);
-            }
-        }
-        public void AddName(string name)
-        {
-            if (Names.Count < ColorList.Count)
-            {
-                NameList.StringBox.Text = name;
-                NameList.AddNamefromTextBox();
-            }
-            else
-            {
-                MessageBox.Show("Too many names on the List");
             }
         }
         private void ResetWinnerLabels()
@@ -125,10 +114,11 @@ namespace WheelOfNames
         }
         private void Spin()
         {
-            int selectedIndex = rand.Next(Names.Count);
-            string selectedColor = Names[selectedIndex];
+            IList<string> _namesOnWheel = NamesOnListBox != null && NamesOnListBox.Count > 0 ? NamesOnListBox.Take(ColorList.Count).ToList() : ColorList;
+            int selectedIndex = rand.Next(_namesOnWheel.Count);
+            string selectedColor = _namesOnWheel[selectedIndex];
 
-            double anglePerSlice = 360.0 / Names.Count;
+            double anglePerSlice = 360.0 / _namesOnWheel.Count;
             double targetAngle = 360 - (selectedIndex * anglePerSlice + anglePerSlice / 2);
 
             double currentRotation = ((RotateTransform)WheelCanvas.RenderTransform).Angle;
@@ -195,7 +185,7 @@ namespace WheelOfNames
                 NameList.RemoveSelectedName();
             }
         }
-        private System.Windows.Media.Color GetContrastColor(System.Windows.Media.Color color)
+        private Color GetContrastColor(Color color)
         {
             // Calculate luminance (perceived brightness)
             double luminance = (0.299 * color.R) + (0.587 * color.G) + (0.114 * color.B);

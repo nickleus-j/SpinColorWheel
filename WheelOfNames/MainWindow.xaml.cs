@@ -24,8 +24,8 @@ namespace WheelOfNames
         public MainWindow()
         {
             InitializeComponent();
-            ColorWheel.AddName("Sara");
-            ColorWheel.AddName("John");
+            //ColorWheel.AddName("Sara");
+            //ColorWheel.AddName("John");
             ColorWheel.DrawWheel();
         }
 
