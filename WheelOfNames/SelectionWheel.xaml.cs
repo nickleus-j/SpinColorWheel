@@ -45,7 +45,7 @@ namespace WheelOfNames
         };
         
 
-        private IList<string> NamesOnListBox => NameList.NamesListed;
+        private IList<string> NamesOnListBox => NameList.NameItems.Select(s=>s.Value).ToList();
         private readonly List<Path> slicePaths = new List<Path>();
         private readonly Random rand = new Random();
         public SelectionWheel()

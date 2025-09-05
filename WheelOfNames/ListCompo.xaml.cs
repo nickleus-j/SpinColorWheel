@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,24 +22,23 @@ namespace WheelOfNames
     /// </summary>
     public partial class ListCompo : UserControl
     {
-        private ObservableCollection<string> _names { get; set; }
-        public IList<string> NamesListed => NamesBox != null? _names : ["no one"];
-        public string ConcatenatedNames=> NamesListed!=null&&NamesListed?.Count>0 ? String.Empty: String.Join(", ", NamesListed);
+        public ObservableCollection<NameItem> NameItems { get; set; }
+        public string ConcatenatedNames=> NameItems != null&& NameItems?.Count>0 ? String.Empty: String.Join(", ", NameItems.Select(s=>s.Value));
         public event EventHandler ChangeNames;
         public ListCompo()
         {
             InitializeComponent();
-            _names = new ObservableCollection<string>();
+            NameItems = new ObservableCollection<NameItem>();
             DataContext = this;
             RaiseNameChangeEvent();
+            NameItems.CollectionChanged += (_, __) => HookItemEvents();
         }
         public void AddNamefromTextBox()
         {
             if (!String.IsNullOrWhiteSpace(StringBox.Text))
             {
-                NamesListed.Add(StringBox.Text);
-                NamesBox.ItemsSource = _names;
-                //NamesBox.Items.Add(StringBox.Text.ToString());
+                NameItems.Add(new NameItem { Value= StringBox.Text });
+                NamesBox.ItemsSource = NameItems;
                 StringBox.Text = "";
                 RaiseNameChangeEvent();
             }
@@ -48,7 +48,7 @@ namespace WheelOfNames
             if (NamesBox.SelectedItem != null)
             {
                 int index = NamesBox.SelectedIndex;
-                NamesListed.Remove(NamesListed.ElementAt(index));
+                NameItems.Remove(NameItems.ElementAt(index));
                 //NamesBox.Items.RemoveAt(index);
                 RaiseNameChangeEvent();
             }
@@ -67,7 +67,21 @@ namespace WheelOfNames
             {
                 ChangeNames(this, new EventArgs());
             }
-            Remove.IsEnabled = _names.Count > 1;
+            Remove.IsEnabled = NameItems.Count > 1;
+        }
+        private void HookItemEvents()
+        {
+            foreach (NameItem item in NameItems)
+            {
+                item.PropertyChanged -= ItemChanged;
+                item.PropertyChanged += ItemChanged;
+            }
+            RaiseNameChangeEvent();
+        }
+        private void ItemChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(NameItem.Value))
+                RaiseNameChangeEvent();
         }
         private void RemoveNameButton_Click(object sender, RoutedEventArgs e)
         {
