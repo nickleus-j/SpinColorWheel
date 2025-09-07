@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WheelOfNames
 {
-    public class NameItem : INotifyPropertyChanged
+    public class NameEntry : INotifyPropertyChanged
     {
         private string _value;
         public string Value

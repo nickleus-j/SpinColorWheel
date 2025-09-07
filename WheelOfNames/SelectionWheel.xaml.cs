@@ -63,6 +63,7 @@ namespace WheelOfNames
 
             IList<string> _namesOnWheel = NamesOnListBox != null && NamesOnListBox.Count > 0 ? NamesOnListBox.Take(ColorList.Count).ToList() : ColorList;
             double anglePerSlice = _namesOnWheel.Count>1? 360.0 / _namesOnWheel.Count:359.9;
+            double wheelFontSize = _namesOnWheel.Count < 8 ? 16 : 12;
             for (int i = 0; i < _namesOnWheel.Count; i++)
             {
                 double startAngle = i * anglePerSlice;
@@ -98,6 +99,7 @@ namespace WheelOfNames
                 var label = new System.Windows.Controls.TextBlock
                 {
                     Text = _namesOnWheel[i],
+                    FontSize = wheelFontSize,
                     Foreground = new SolidColorBrush(GetContrastColor(solidBrush.Color)),
                     FontWeight = FontWeights.Bold
                 };

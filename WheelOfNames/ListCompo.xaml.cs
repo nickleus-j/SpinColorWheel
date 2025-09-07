@@ -22,13 +22,13 @@ namespace WheelOfNames
     /// </summary>
     public partial class ListCompo : UserControl
     {
-        public ObservableCollection<NameItem> NameItems { get; set; }
+        public ObservableCollection<NameEntry> NameItems { get; set; }
         public string ConcatenatedNames=> NameItems != null&& NameItems?.Count>0 ? String.Empty: String.Join(", ", NameItems.Select(s=>s.Value));
         public event EventHandler ChangeNames;
         public ListCompo()
         {
             InitializeComponent();
-            NameItems = new ObservableCollection<NameItem>();
+            NameItems = new ObservableCollection<NameEntry>();
             DataContext = this;
             RaiseNameChangeEvent();
             NameItems.CollectionChanged += (_, __) => HookItemEvents();
@@ -37,7 +37,7 @@ namespace WheelOfNames
         {
             if (!String.IsNullOrWhiteSpace(StringBox.Text))
             {
-                NameItems.Add(new NameItem { Value= StringBox.Text });
+                NameItems.Add(new NameEntry { Value= StringBox.Text });
                 NamesBox.ItemsSource = NameItems;
                 StringBox.Text = "";
                 RaiseNameChangeEvent();
@@ -71,7 +71,7 @@ namespace WheelOfNames
         }
         private void HookItemEvents()
         {
-            foreach (NameItem item in NameItems)
+            foreach (NameEntry item in NameItems)
             {
                 item.PropertyChanged -= ItemChanged;
                 item.PropertyChanged += ItemChanged;
@@ -80,7 +80,7 @@ namespace WheelOfNames
         }
         private void ItemChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(NameItem.Value))
+            if (e.PropertyName == nameof(NameEntry.Value))
                 RaiseNameChangeEvent();
         }
         private void RemoveNameButton_Click(object sender, RoutedEventArgs e)
