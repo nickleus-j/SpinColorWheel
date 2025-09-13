@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -179,6 +180,7 @@ namespace WheelOfNames
                 DrawWheel();
             }
             Spin();
+            SystemSounds.Hand.Play(); // Or Asterisk, Exclamation, Hand, Question
         }
         private void RemovePick_Click(object sender, RoutedEventArgs e)
         {
