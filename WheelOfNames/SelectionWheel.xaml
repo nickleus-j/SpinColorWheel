@@ -1,14 +1,19 @@
-﻿<UserControl x:Class="WheelOfNames.SelectionWheel"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WheelOfNames"
+             xmlns:ColorSets="clr-namespace:WheelOfNames.ColorSets" x:Class="WheelOfNames.SelectionWheel"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <DockPanel>
-        <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames" DockPanel.Dock="Left">
-        </local:ListCompo>
+        <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames" DockPanel.Dock="Left"/>
+        <StackPanel DockPanel.Dock="Right">
+            <ComboBox x:Name="ColorSetBox">
+            </ComboBox>
+        </StackPanel>
+
         <Canvas x:Name="WheelCanvas" Width="400" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="WheelRotate" CenterX="200" CenterY="200"/>

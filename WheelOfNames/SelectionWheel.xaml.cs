@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WheelOfNames.ColorSets;
 
 namespace WheelOfNames
 {
@@ -23,35 +24,34 @@ namespace WheelOfNames
     /// </summary>
     public partial class SelectionWheel : UserControl
     {
-        private readonly List<string> ColorList = new List<string>
-        {
-            "Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "AliceBlue",
-            "AntiqueWhite",
-            "Aquamarine",
-            "Azure",
-            "Beige",
-            "DarkKhaki",
-            "Black","Tomato",
-            "BlanchedAlmond",
-            "BlueViolet",
-            "Brown",
-            "BurlyWood",
-            "Seagreen","Violet",
-            "Chartreuse",
-            "Chocolate",
-            "Coral",
-            "CornflowerBlue",
-            "Crimson","Gold","Silver",
-            "Cyan"
-        };
-        
-
+        private IList<string> ColorList = new DefaultColors().GetColors();
         private IList<string> NamesOnListBox => NameList.NameItems.Select(s=>s.Value).ToList();
         private readonly List<Path> slicePaths = new List<Path>();
         private readonly Random rand = new Random();
         public SelectionWheel()
         {
             InitializeComponent();
+            InitializeColorSetBox();
+        }
+        private void InitializeColorSetBox()
+        {
+
+            foreach (string name in ColorSetListings.GetColorSetNames())
+            {
+                ColorSetBox.Items.Add(name);
+            }
+            ColorSetBox.SelectedIndex = 0;
+            ColorSetBox.SelectionChanged += Color_SelectionChanged;
+        }
+        private void Color_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Handle the selection change logic here
+            ComboBox cBox = sender as ComboBox;
+            if (cBox != null && cBox.SelectedItem != null)
+            {
+                ColorList= ColorSetBox.SelectedIndex==0? ColorSetListings.GetDefaultColors(): ColorSetListings.GetMaterialColors();
+                DrawWheel();
+            }
         }
         public void DrawWheel()
         {
