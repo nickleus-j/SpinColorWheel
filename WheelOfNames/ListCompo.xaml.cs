@@ -4,17 +4,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 namespace WheelOfNames
 {
     /// <summary>
@@ -49,7 +43,6 @@ namespace WheelOfNames
             {
                 int index = NamesBox.SelectedIndex;
                 NameItems.Remove(NameItems.ElementAt(index));
-                //NamesBox.Items.RemoveAt(index);
                 RaiseNameChangeEvent();
             }
         }
@@ -93,6 +86,15 @@ namespace WheelOfNames
         {
             if (e.Key != Key.Enter && e.Key != Key.Return && e.Key != Key.BrowserRefresh) return;
             AddNamefromTextBox();
+        }
+
+        private void NamesBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                RemoveSelectedName();
+                e.Handled = true; // Optional: prevent default delete behavior
+            }
         }
     }
 }

@@ -29,6 +29,6 @@ namespace WheelOfNames.ColorSets
             "Crimson","Gold","Silver",
             "Cyan"
         };
-        public virtual List<string> GetColors()=>ColorList;
+        public virtual List<string> GetColors()=>ColorList.Shuffle();
     }
 }
