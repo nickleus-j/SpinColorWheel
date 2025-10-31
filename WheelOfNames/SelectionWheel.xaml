@@ -7,6 +7,12 @@
              xmlns:ColorSets="clr-namespace:WheelOfNames.ColorSets" x:Class="WheelOfNames.SelectionWheel"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ZuneBackground" Color="#FF1C1C1C"/>
+        <SolidColorBrush x:Key="ZuneForeground" Color="White"/>
+        <SolidColorBrush x:Key="ZuneDarkForeground" Color="#FF1C1C1C"/>
+        <SolidColorBrush x:Key="ZuneAccent" Color="#EEBA34"/>
+    </UserControl.Resources>
     <DockPanel>
         <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames" DockPanel.Dock="Left"/>
         <StackPanel DockPanel.Dock="Right">
@@ -22,7 +28,9 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Label x:Name="ResultLabel" FontSize="20" HorizontalAlignment="Center" Margin="10" FontFamily="Segoe UI Semibold"/>
             <Button x:Name="PickRemoverBtn" Content="Remove Picked Name" Height="30" Click="RemovePick_Click" Background="#FFE6AFB4" FontSize="14" Visibility="Hidden"/>
-            <Button Content="Spin" Width="100" Height="40" Click="Spin_Click" Background="#FFEFF585" FontSize="20"/>
+            <Button Content="Spin" Width="100" Height="40" Click="Spin_Click"  Background="Transparent"
+        Foreground="{StaticResource ZuneAccent}"
+        FontSize="18"/>
         </StackPanel>
     </DockPanel>
 </UserControl>
