@@ -15,6 +15,10 @@ namespace WheelOfNames.ColorSets
         {
             return new MaterialColors().GetColors();
         }
-        public static IList<string> GetColorSetNames() => ["Default", "Material"];
+        public static IList<string> GetCatppuccinoColors()
+        {
+            return new CatppuccinoColors().GetColors();
+        }
+        public static IList<string> GetColorSetNames() => ["Default", "Material", "Catppuccino"];
     }
 }

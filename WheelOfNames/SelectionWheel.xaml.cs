@@ -49,7 +49,18 @@ namespace WheelOfNames
             ComboBox cBox = sender as ComboBox;
             if (cBox != null && cBox.SelectedItem != null)
             {
-                ColorList= ColorSetBox.SelectedIndex==0? ColorSetListings.GetDefaultColors(): ColorSetListings.GetMaterialColors();
+                switch (ColorSetBox.SelectedIndex)
+                {
+                    case 1:
+                        ColorList = ColorSetListings.GetMaterialColors();
+                        break;
+                    case 2:
+                        ColorList = ColorSetListings.GetCatppuccinoColors();
+                        break;
+                    default:
+                        ColorList = ColorSetListings.GetDefaultColors();
+                        break;
+                }
                 DrawWheel();
             }
         }
