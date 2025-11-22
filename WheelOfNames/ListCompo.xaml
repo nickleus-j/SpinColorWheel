@@ -10,7 +10,7 @@
         <SolidColorBrush x:Key="ZuneBackground" Color="#FF1C1C1C"/>
         <SolidColorBrush x:Key="ZuneForeground" Color="White"/>
         <SolidColorBrush x:Key="ZuneDarkForeground" Color="#FF1C1C1C"/>
-        <SolidColorBrush x:Key="ZuneAccent" Color="#FFB900"/>
+        <SolidColorBrush x:Key="ZuneAccent" Color="#AD9900"/>
     </UserControl.Resources>
     <StackPanel>
         <Label Content="Enter Names Here" 
