@@ -16,7 +16,7 @@
     <DockPanel>
         <local:ListCompo x:Name="NameList" ChangeNames="NameList_ChangeNames" DockPanel.Dock="Left"/>
         <StackPanel DockPanel.Dock="Right">
-            <ComboBox x:Name="ColorSetBox">
+            <ComboBox x:Name="ColorSetBox" FontFamily="Segoe UI Semibold">
             </ComboBox>
         </StackPanel>
 

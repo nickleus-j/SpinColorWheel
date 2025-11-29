@@ -15,8 +15,8 @@
     <StackPanel>
         <Label Content="Enter Names Here" 
            FontSize="32"
-           Foreground="{StaticResource ZuneDarkForeground}"></Label>
-        <TextBox x:Name="StringBox" FontSize="14" KeyUp="StringBox_KeyUp" FontFamily="Segoe UI"></TextBox>
+           Foreground="{StaticResource ZuneDarkForeground}" FontFamily="Segoe UI Semibold"></Label>
+        <TextBox x:Name="StringBox" FontSize="14" KeyUp="StringBox_KeyUp" FontFamily="Segoe UI Semibold"></TextBox>
         <Button Background="Transparent"
         Foreground="{StaticResource ZuneAccent}"
         FontSize="18"
